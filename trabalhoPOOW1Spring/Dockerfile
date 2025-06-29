@@ -1,6 +1,6 @@
 FROM eclipse-temurin:21-jdk-alpine
 
-Install build tools and PostgreSQL client
+#Install build tools and PostgreSQL client
 RUN apk add --no-cache \
     git \
     maven \
@@ -10,17 +10,17 @@ RUN apk add --no-cache \
 
 WORKDIR /app
 
-Clone repository
+#Clone repository
 RUN git clone https://github.com/namirso/trabalhoDOCKER.git ./
 
 WORKDIR /app/trabalhoPOOW1Spring
 
-Build application
+#Build application
 RUN mvn clean package -DskipTests
 
-Create log directory
+#Create log directory
 VOLUME ["/var/log/app"]
 RUN mkdir -p /var/log/app
 
-Application entry point
+#Application entry point
 ENTRYPOINT ["java", "-jar", "target/trabalhoPOOW1Spring-0.0.1-SNAPSHOT.jar"]
