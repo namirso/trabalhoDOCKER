@@ -1,6 +1,6 @@
 FROM eclipse-temurin:21-jdk-alpine
 
-#Install build tools and PostgreSQL client
+# Instalar dependências
 RUN apk add --no-cache \
     git \
     maven \
@@ -8,19 +8,24 @@ RUN apk add --no-cache \
     tini \
     postgresql-client
 
+# Diretório de trabalho
 WORKDIR /app
 
-#Clone repository
-RUN git clone https://github.com/namirso/trabalhoDOCKER.git ./
+# Clonar o projeto do GitHub
+RUN git clone https://github.com/namirso/trabalhoDOCKER.git .
 
+# Entrar no diretório do projeto
 WORKDIR /app/trabalhoPOOW1Spring
 
-#Build application
+# Compilar o projeto (sem testes)
 RUN mvn clean package -DskipTests
 
-#Create log directory
-VOLUME ["/var/log/app"]
+# Criar diretório de logs
 RUN mkdir -p /var/log/app
+VOLUME ["/var/log/app"]
 
-#Application entry point
+# Expõe a porta 8080
+EXPOSE 8080
+
+# Comando de inicialização
 ENTRYPOINT ["java", "-jar", "target/trabalhoPOOW1Spring-0.0.1-SNAPSHOT.jar"]
