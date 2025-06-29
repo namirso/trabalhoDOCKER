@@ -11,7 +11,7 @@ RUN apk add --no-cache \
 WORKDIR /app
 
 Clone repository
-RUN git clone https://github.com/namirso/trabalho-docker.git ./
+RUN git clone https://github.com/namirso/trabalhoDOCKER.git ./
 
 WORKDIR /app/trabalhoPOOW1Spring
 
